@@ -65,6 +65,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/prueba', function () {
         return view('prueba.index');
     })->name('prueba.index');
+    Route::post('/prueba', function () {
+        /* return 'Procesando la prueba...'; */
+        $message= request('message');
+        //Insert into base de datos
+    });
 });
 
 require __DIR__ . '/auth.php';

@@ -2,7 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-
+use App\Models\Prueba;
+use App\Models\User;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -66,9 +67,14 @@ Route::middleware('auth')->group(function () {
         return view('prueba.index');
     })->name('prueba.index');
     Route::post('/prueba', function () {
-        /* return 'Procesando la prueba...'; */
-        $message= request('message');
         //Insert into base de datos
+        Prueba::create([
+            /* return 'Procesando la prueba...'; */
+            'message' => request('message'),
+            'user_id' => auth()->id()
+        ]);
+        return to_route('prueba.index')
+        ->with('status','Mensaje creado, color cartón');
     });
 });
 

@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PruebaController;
 use Illuminate\Support\Facades\Route;
-use App\Models\Prueba;
 use App\Models\User;
 /*
 |--------------------------------------------------------------------------
@@ -63,19 +63,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::get('/prueba', function () {
-        return view('prueba.index');
-    })->name('prueba.index');
-    Route::post('/prueba', function () {
-        //Insert into base de datos
-        Prueba::create([
-            /* return 'Procesando la prueba...'; */
-            'message' => request('message'),
-            'user_id' => auth()->id()
-        ]);
-        return to_route('prueba.index')
-        ->with('status','Mensaje creado, color cartón');
-    });
+
+    Route::get('/prueba',[PruebaController::class, 'index'])
+    ->name('prueba.index');
+
+    Route::post('/prueba',[PruebaController::class,'store'])
+    ->name('prueba.store');
 });
 
 require __DIR__ . '/auth.php';

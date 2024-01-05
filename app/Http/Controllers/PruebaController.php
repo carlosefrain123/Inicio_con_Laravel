@@ -12,7 +12,7 @@ class PruebaController extends Controller
      */
     public function index()
     {
-        //
+        return view('prueba.index');
     }
 
     /**
@@ -28,7 +28,14 @@ class PruebaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //Insert into base de datos
+        Prueba::create([
+            /* return 'Procesando la prueba...'; */
+            'message' => $request->get('message'),
+            'user_id' => auth()->id()
+        ]);
+        return to_route('prueba.index')
+        ->with('status','Mensaje creado, color cartón');
     }
 
     /**

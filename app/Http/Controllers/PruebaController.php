@@ -28,6 +28,9 @@ class PruebaController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'message'=>['required','min:3']
+        ]);
         //Insert into base de datos
         Prueba::create([
             /* return 'Procesando la prueba...'; */
